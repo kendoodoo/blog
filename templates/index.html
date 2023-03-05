@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+  
+  {% block main %}
+<title>blog</title>
+  
+<style>
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 3px;
+  }
+  
+  body {
+    padding: 1em;
+  }
+
+  li {
+    display: inline;
+  }
+  li a {
+    padding: 8px;
+    font-family: san-serif;
+    border: 1px solid grey;
+  }
+
+  .content {
+    width: 100%;
+    max-width: calc(1000px);
+    margin: auto;
+  }
+
+  @media screen and (max-width: 726px) {
+    #bobber {
+      display: none;
+    }
+  }
+
+</style>
+<center>
+  <div class="banner">
+    <img id="bobber" alt="bobber" src="https://i.ibb.co/F4rqsc3/bobber.gif">
+    <img id="banner" src="https://i.ibb.co/cYPTVVm/banner.gif">
+    <img id="bobber" alt="bobber" src="https://i.ibb.co/F4rqsc3/bobber.gif">
+    </div>
+    <ul>
+      <li><a href="/">home</a></li>
+      <li><a href="/blog">blog</a></li>
+      <li><a href="mailto:info@kentest.net">mail me</a></li>
+    </ul>
+  </center>
+  <br>
+  <hr>
+  <div class="content">
+      {% for e in post %}
+      <div class="post">
+          <h2><a href="/blog/{{ e.slug }}">{{ e.title|safe }}</a>
+          </h2>
+          <span>{{ e.date }}</span>
+      </div>
+      <br>
+      {% else %}
+        <h2>ken is wiping it blank.<br><br>or the database is down.</h2>
+      {% endfor %}
+      <br>
+      {% if jesus == "-" %}
+      <a href="/blog/">back to first</a>
+      {% else %}
+      <a href="/blog/{{ wut + 1 }}">next</a>
+  {% endif %}
+  </div>
+  <br>
+  {% endblock %}

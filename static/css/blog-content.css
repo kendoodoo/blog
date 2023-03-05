@@ -1,0 +1,33 @@
+#viewed-times {
+    color:hsl(210,8%,45%);
+    margin-top: 2px;
+}
+
+.content-post {
+    margin: 8px;
+}
+
+.content-post * {
+    margin-block-start: 0.25em;
+    margin-block-end: 0.25em;
+}
+
+.post-info {
+    border: 1px dashed red;
+    padding: 12px;
+}
+
+.content #back {
+    margin-block-start: 0;
+}
+
+.comments {
+    border-top: 1px solid rgb(49, 179, 47);
+    padding-top: 12px;
+    padding-left: 6px;
+}
+
+.comments #mahgod {
+    font-family: courier;
+    font-size: 1.5em;
+}

@@ -1,0 +1,35 @@
+.sidebar {
+    height: 100%;
+    width: 195px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    /*background-color: rgb(47, 47, 47);*/
+    background: url('https://i.ibb.co/pRCWtYv/download-1.jpg');
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+  
+  .sidebar .duh {
+    padding: 6px 8px 6px 16px;
+  }
+  .sidebar a {
+    font-size: 19px;
+    color: #f7f7f7;
+    display: block;
+    padding-bottom: 5px;
+  }
+.sidebar img {
+    border: 3px ridge grey;
+}
+
+  .content {
+    padding: 1em;
+    margin-left: 195px;
+    font-family: arial;
+}
+
+.content *:first-child {
+    margin-block-start: 0;
+}

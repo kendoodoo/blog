@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "login-sidebar.html" %}
+<div class="content">
+    <div id="div">
+        <p style="margin-block-start:0;margin-block-end:0;"><a href="/blog/dashboard"><img src="/assets/image/back.gif" width="70"></a></p>
+        <h1>create post</h1>
+        </div>
+        <form action="/blog/create" method="post" required>
+        <div>
+        <input type="text" placeholder="title" id="text" name="title" required>
+        </div>
+        <br>
+        <input type="file" id="files" name="files" accept="image/*">
+        <br><br>
+        <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+        <div id="editor"></div>
+        <br>
+        <input type='hidden' name='content' id='hidden-input'>
+        <input type="submit" value="Create!">
+        </form>
+        <script src="https://cdn.quilljs.com/1.3.0/quill.min.js"></script>
+        <script src="https://cdn.rawgit.com/kensnyder/quill-image-resize-module/3411c9a7/image-resize.min.js"></script>
+        <script src="/blog/static/js/niceimg.js"></script>
+        <script>
+            var ColorClass = Quill.import('attributors/class/color');
+Quill.register(ColorClass, true);
+var quill = new Quill('#editor', {
+  modules: {
+    imageResize: {
+      displaySize: true
+    },
+    clipboard: {
+      matchVisual: false
+    },
+    toolbar: [
+      [{
+        header: [1, 2, 3, true]
+      }],
+      ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+      [{
+        list: 'ordered'
+      }, {
+        list: 'bullet'
+      }, {
+        align: []
+      }],
+      ['image','video','code-block', 'link']
+    ]
+  },
+  placeholder: 'type some shit here',
+  theme: 'snow'
+});
+
+quill.on('text-change', function() {
+  document.querySelector('#hidden-input').value = quill.root.innerHTML.replace(/<br>+$/, "")
+});
+
+        </script>
+        <style>
+            #editor {
+  height: 60vh;
+  font-size: 1.1em;
+}
+
+.content {
+  font-family: arial;
+}
+
+#text {
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid grey;
+  width: 40vw;
+  padding: 8px;
+  font-size: 1.1em;
+}
+        </style>
+</div>
+<script>
+  let ischange = false;
+  document.querySelector('.ql-editor').addEventListener('input', () => ischange = true)
+  window.addEventListener('beforeunload', (event) => {
+    if (ischange) {
+      event.returnValue = 'hold the fuck up you didnt finish';
+    }
+  })    
+</script>
+{% endblock %}

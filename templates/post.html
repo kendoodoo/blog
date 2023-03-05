@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block main %}
+<script src="/blog/static/js/customcaptcha.js" defer></script>
+<link rel="stylesheet" href="/blog/static/css/blog-content.css">
+<title>ken's blog: {{ singlepost.title }}</title>
+<meta property="og:type" content="website"> 
+<meta property="og:title" content="{{ singlepost.title }}">
+<meta property="og:image" content="https://via.placeholder.com/1200x630/000000/ffffff.gif?text={{ singlepost.title|truncate(100, True) }}...">
+<style>
+  body {
+    padding: 1em;
+  }
+    #profile-pic {
+  image-rendering: pixelated;
+  height: 40px;
+  border: 3px outset;
+  border-top: 3px solid #ddd;
+  border-left: 3px solid #bbb;
+  pointer-events: none;
+  border-radius: 4px;
+  user-select: none;
+}
+
+#main {
+  display: flex;
+  padding-bottom: 24px;
+}
+
+#wft {
+  margin-left: 8px;
+  padding-left: 8px;
+  border-left: 2px solid black;
+}
+
+#comment-username {
+  color: grey;
+}
+
+.comment-content {
+  padding-left: 6px;
+}
+
+.comment-content * {
+  margin-block-start: 0.46em;
+  margin-block-end: 0.46em;
+}
+
+.comment-content *:last-child {
+  margin-block-end: 0.2em;
+}
+
+.ql-syntax {
+  overflow-x: scroll;
+  border: 1px solid magenta;
+  padding: 1em;
+}
+
+.profile {
+ font-family: courier;
+ font-size: 1.6em;
+ font-weight: bold;
+ color: floralwhite;
+ width: 40px;
+ height: 40px;
+ line-height: 40px;
+ background-color: #2e6bc7;
+ text-align: center;
+ text-transform: uppercase;
+}
+
+.ql-video {
+    width: 400px;
+    height: 220px;
+}
+
+.content-post img {
+  display: block;
+margin-left: auto;
+margin-right: auto;
+}
+
+@media screen and (max-width: 726px) {
+    #bobber {
+      display: none;
+    }
+    .jumbo {
+        margin-left: 0;
+    }
+    .ql-video {
+      width: 250px;
+      height: 100%;
+    }
+
+    .content-post {
+      text-align: center;
+    }
+    #wu {
+      display: inline-block; 
+      text-align: left;
+    }
+    .post-info h2 {
+      font-size: 1.2em;
+    }
+  }
+
+.content {
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.post-info h2 {
+  margin-block-start: 0em;
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 3px;
+}
+
+li {
+  display: inline;
+}
+li a {
+  padding: 8px;
+  font-family: san-serif;
+  border: 1px solid grey;
+}
+
+</style>
+<center>
+<div class="banner">
+  <img id="bobber" alt="bobber" src="https://i.ibb.co/F4rqsc3/bobber.gif">
+  <img id="banner" src="https://i.ibb.co/cYPTVVm/banner.gif">
+  <img id="bobber" alt="bobber" src="https://i.ibb.co/F4rqsc3/bobber.gif">
+  </div>
+    <br>
+  <ul>
+    <li><a href="/">home</a></li>
+    <li><a href="/blog">blog</a></li>
+    <li><a href="mailto:info@kentest.net">mail me</a></li>
+  </ul>
+</center>
+<br>
+<hr>
+<div class="content">
+  <div class="fuck">
+    <br>
+        <div class="post-info">
+        <h2>{{ singlepost.title|safe }}</h2>
+        <span>ken, <abbr title="">{{ singlepost.date }}</abbr></span>
+</div>
+<br>
+    <div class="content-post">
+      <div id="wu">
+        {{ singlepost.content|safe }}
+      </div>
+    </div>
+    <br>
+<div class="comments">
+<span id="mahgod">{{ numberofcomments }} comment{% if numberofcomments > 0 %}<span>s</span>{% endif %}:</span>
+<br><br>
+<form method="POST" required>
+<input type="hidden" value="{{ singlepost.slug }}" name="id_comment">
+<input name="username" maxlength="30" placeholder="name" type="text" required>
+<br><br>
+<textarea maxlength="250" placeholder="content here" style="resize:none;padding: 0.5em;font-family:arial;" name="content" rows="3" required></textarea>
+<br><br>
+<div class="d"><canvas onclick="reloadcaptcha()" title='click to reset' id="cvs"></canvas><input id="captchaverify" type="text" maxlength="6" placeholder="enter" required></div>
+<input type="text" maxlength="6" style="opacity:0;height:0" id="thuntaduns" required>
+<br>
+<button onclick="chekhim()">post</button>
+</form>
+<br>
+<hr style="margin-block-start:0">
+<br>
+
+<div class="comment-zone">
+{% for c in comments %}
+<div id='main'>
+    <div id="profile-pic"><div class="profile">{{ c.name[0:1] }}</div></div>
+    <div id="wft">
+      <span id="comment-username"><b>{{ c.name }}</b></span>
+      <div class="comment-content">
+        <p>
+            {{ c.content }}
+        </p>
+      </div>
+    </div>
+</div>
+{% endfor %}
+</div>
+
+{% endblock %}

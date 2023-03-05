@@ -1,0 +1,34 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="centered-text">
+  <h1><span id="buh" onclick="i()" style="color:crimson">404</span> <span id="duck">not found</span>.</h1>
+  <h1 id="bobby">Do you see bob?<br>Please help me.</h1>
+  <h2>
+    <a href="/">back home</a> or <span id="woah">solve</span>
+  </h2>
+</div>
+<style>
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: ComicSansMS;
+}
+
+body {
+  display: table;
+}
+
+.centered-text {
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
+  background:  url('https://i.ibb.co/pbdbSL8/ezgif-com-gif-maker-7.gif');
+}
+</style>
+<script>
+function i() {
+	document.querySelector('#buh').innerHTML="bob";document.querySelector('#duck').innerHTML='founded';document.querySelector('#bobby').innerHTML='Oh now I see him,<br>Thanks.';document.querySelector('#woah').innerHTML='<a href="/chuckecheese">see my secret</a>';console.log('nah')
+}
+</script>

@@ -1,0 +1,77 @@
+
+<noscript>
+
+</noscript>
+<div class="video_container" url="{{ url }}">
+    <div class="video_title_container"><p class="text-title"></p></div><div class="button-container"><button style="border: 0; background: none;" class="button_play" onclick="play()"></button></div>
+</div>
+
+<style>
+    body {
+  font-family: arial;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  background-color: black;
+}
+</style>
+
+<script defer>
+    var thumbnails,vidname,channelid,apikey="AIzaSyD-9Hc4Qe6rnTaZvdLs8KWVkT9GihY9k3M",vidbg=document.querySelector(".video_container"),vidtitle=document.querySelector(".text-title"),playbutton=document.querySelector(".button_play").innerHTML='<img src="https://svgshare.com/i/ohV.svg">';function play(){vidbg.innerHTML="",vidbg.style.backgroundImage="url('')",vidbg.innerHTML=`<iframe width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/${vidbg.getAttribute("url")}?autoplay=1&mute=1&vq=small&rel=0" frameborder="0">
+</iframe>`}document.body.insertAdjacentHTML("beforebegin",`<style>
+body {
+  font-family: arial;
+  margin: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: hidden;
+  background-color: black;
+}
+.button_play {
+  width: 68px;
+  height: 48px;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.video_profile_pic {
+  clip-path: circle();
+  pointer-events: none;
+}
+
+.text-title {
+  color: white;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  font-size: 1.2em;
+}
+
+.video_container {
+  text-align: center;
+  width: 100%;
+  height: 100vh;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+    align-items: center;        /* for single line flex container */
+    align-content: center;
+  height: calc(100% - 80px);
+}
+
+.video_title_container {
+  padding: 0.55em;
+  background-color:rgba(0, 0, 0, 0.5);
+  display: flex;
+}</style>`),fetch(`https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${vidbg.getAttribute("url")}&key=${apikey}`).then(e=>e.json()).then(e=>{thumbnails=e.items[0].snippet.thumbnails.medium,vidname=e.items[0].snippet.title,vidtitle.innerHTML=vidname,vidbg.style.backgroundImage=`url(${thumbnails.url})`,channelid=e.items[0].snippet.channelId});
+</script>
