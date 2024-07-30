@@ -1,2 +1,2 @@
 # blog
-my blog, at https://kentest.net/blog
+just getting started
